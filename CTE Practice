@@ -1,0 +1,29 @@
+#I created my first CTE
+
+WITH popularity_average_CTE AS (
+SELECT s.artist_name,
+AVG(s.popularity) AS average_popularity
+FROM SpotifyData s 
+GROUP BY s.artist_name
+)
+ 
+SELECT  artist_name,
+        average_popularity,
+        'Top Star' AS tag
+FROM popularity_average_CTE
+WHERE average_popularity>=90;
+
+
+#Created another CTE for a different dataset:
+
+WITH safety_average_cte AS (
+SELECT street, AVG(safetyrating) as 'rating'
+FROM citybikelanes
+GROUP BY street)
+
+SELECT 
+street,
+rating,
+'safe lane' as 'label'
+FROM safety_average_cte
+WHERE rating >=4;
